@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+  <title>SPORTLINK - Premium Live</title>
+  
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@600;700;800&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-dark: #000000;
+      --bg-card: #0c0c0c;
+      --gold-main: #C0C0C0;
+      --gold-glow: rgba(192, 192, 192, 0.3);
+      --text-white: #e0e0e0;
+      --text-gray: #888888;
+      --border-color: rgba(192, 192, 192, 0.1);
+      --accent-red: #9370DB;
+      --gradient-bg-top: #0a0a0a;
+      --gradient-bg-bottom: #000000;
+    }
+
+    * { 
+      box-sizing: border-box; 
+      -webkit-tap-highlight-color: transparent; 
+      outline: none; 
+      user-select: none; 
+      -webkit-touch-callout: none;
+      -webkit-text-size-adjust: 100%;
+    }
+    
+    body {
+      margin: 0; padding: 0;
+      background-color: var(--bg-dark);
+      background-image: radial-gradient(circle at top center, var(--gradient-bg-top), var(--gradient-bg-bottom) 70%);
+      font-family: 'Outfit', sans-serif;
+      color: var(--text-white);
+      padding-bottom: 80px;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed; top: 0; width: 100%; height: 60px;
+      background: rgba(0, 0, 0, 0.98);
+      backdrop-filter: blur(25px);
+      border-bottom: 1px solid var(--border-color);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 16px;
+      z-index: 1000;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.9);
+    }
+
+    .menu-icon { font-size: 26px; color: #fff; cursor: pointer; transition: 0.2s transform, 0.2s color; }
+    
+    .logo-container { 
+      position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); 
+      display: flex; align-items: center; gap: 6px;
+    }
+    .logo-text { 
+      font-family: 'Rajdhani'; font-weight: 800; font-size: 20px;
+      color: #fff; letter-spacing: 1.5px;
+      text-shadow: 0 0 8px rgba(255,215,0,0.2);
+    }
+    .logo-text span { color: var(--gold-main); }
+
+    .header-live {
+      display: flex; align-items: center; gap: 7px;
+      background: rgba(255, 77, 77, 0.15);
+      border: 1px solid rgba(255, 77, 77, 0.3);
+      padding: 4px 10px; border-radius: 20px;
+    }
+    .h-dot { 
+      width: 8px; height: 8px; background: var(--accent-red); border-radius: 50%; 
+      animation: blink 1s infinite cubic-bezier(0.4, 0, 0.6, 1);
+    }
+    @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+    .h-text { font-size: 11px; font-weight: 700; color: var(--accent-red); font-family: 'Rajdhani'; text-transform: uppercase; }
+
+    /* VIDEO SECTION */
+    .video-wrapper {
+      margin-top: 60px;
+      width: 100%; position: relative;
+      background: #000;
+      box-shadow: 0 18px 50px rgba(0,0,0,0.9);
+      border-bottom-left-radius: 15px;
+      border-bottom-right-radius: 15px;
+      overflow: hidden;
+    }
+    .video-container { width: 100%; aspect-ratio: 16/9; background-color: #000; }
+    .video-container iframe { width: 100%; height: 100%; border: none; }
+    .video-bar { height: 4px; width: 100%; background: linear-gradient(90deg, transparent 10%, #FFD700, #e6c200, transparent 90%); opacity: 0.7; }
+
+    /* TICKER */
+    .ticker-wrap {
+      background: var(--bg-card); height: 35px;
+      overflow: hidden; display: flex; align-items: center; border-bottom: 1px solid var(--border-color);
+      position: relative; padding: 0 12px;
+    }
+    .ticker-text {
+      color: var(--gold-main); font-weight: 600; font-size: 13px;
+      white-space: nowrap; animation: scroll 20s linear infinite;
+      padding-left: 100%;
+    }
+    @keyframes scroll { 100% { transform: translateX(-100%); } }
+
+/* ACTION SECTION */
+    .action-section { padding: 25px 16px; max-width: 600px; margin: 0 auto; }
+
+    /* BUTTONS */
+    .btn-main {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-radius: 14px; text-decoration: none;
+      background: linear-gradient(45deg, #FFD700, #ffc800);
+      box-shadow: 0 5px 20px rgba(255, 215, 0, 0.4);
+    }
+    .btn-text h3 { margin: 0; color: #000; font-size: 15px; font-family: 'Rajdhani'; text-transform: uppercase; }
+    .btn-text p { margin: 0; color: #333; font-size: 10px; font-weight: 600; }
+
+    .btn-secondary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px; }
+    .btn-sec {
+      background: var(--bg-card); border: 1px solid var(--border-color);
+      padding: 12px; border-radius: 12px; text-decoration: none;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+
+    /* MODAL */
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(0,0,0,0.98);
+      z-index: 9999; display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none; transition: 0.4s; backdrop-filter: blur(20px);
+    }
+    .modal-overlay.active { opacity: 1; pointer-events: auto; }
+    .modal-box {
+      width: 90%; max-width: 340px; background: #151515; border-radius: 25px;
+      padding: 30px 25px; text-align: center; border: 1px solid #333;
+    }
+    .pop-btn { display: block; width: 100%; padding: 14px; border-radius: 12px; text-decoration: none; margin-bottom: 10px; font-weight: 700; }
+    .pb-join { background: var(--gold-main); color: #000; }
+
+    /* SIDEBAR */
+    .sidebar {
+      position: fixed; left: -100%; top: 0; width: 280px; height: 100%;
+      background: #181818; z-index: 5000; transition: 0.3s;
+    }
+    .sidebar.open { left: 0; }
+    .sb-link { display: flex; align-items: center; gap: 16px; padding: 18px 25px; color: #b0b0b0; text-decoration: none; border-bottom: 1px solid #1f1f1f; }
+    .overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.9); z-index: 4999; opacity: 0; pointer-events: none; transition: 0.3s; }
+    .overlay.active { opacity: 1; pointer-events: auto; }
+  </style>
+</head>
+<body>
+
+  <div class="modal-overlay" id="popup">
+    <div class="modal-box">
+      <div class="pop-icon" style="margin-bottom:15px;"><i class="material-icons" style="font-size:40px; color:#FFD700;">chat</i></div>
+      <div class="pop-title" style="color:#fff; font-family:'Rajdhani'; font-size:20px; font-weight:800;">FOLLOW FOR LIVE UPDATES!</div>
+      <p style="color:#aaa; font-size:13px;">Don't miss a single ball. Follow our WhatsApp channel for live links.</p>
+      <a href="https://whatsapp.com/channel/0029VbC2oQsC6ZvmwpR3v73v" class="pop-btn pb-join">Join WhatsApp Channel</a>
+      <button class="pop-btn" style="background:transparent; color:#777; border:1px solid #333;" onclick="closePopup()">Already Following</button>
+    </div>
+  </div>
+
+  <header>
+    <div class="menu-icon material-icons" onclick="toggleMenu()">notes</div>
+    <div class="logo-container">
+      <span class="logo-text">SPORT<span>LINK</span></span>
+    </div>
+    <div class="header-live">
+      <div class="h-dot"></div> <span class="h-text">LIVE</span>
+    </div>
+  </header>
+
+  <div class="sidebar" id="sidebar">
+    <div style="padding:30px; font-family:'Rajdhani'; font-size:24px; font-weight:800; color:#fff; border-bottom:1px solid #333;">SPORT<span style="color:#C0C0C0;">LINK</span></div>
+    <a href="https://whatsapp.com/channel/0029VbC2oQsC6ZvmwpR3v73v" class="sb-link"><i class="material-icons">chat</i> Follow WhatsApp</a>
+    <a href="javascript:location.reload()" class="sb-link"><i class="material-icons">refresh</i> Refresh Page</a>
+    <a href="javascript:sharePage()" class="sb-link"><i class="material-icons">share</i> Share App</a>
+  </div>
+  <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+<div class="video-wrapper">
+    <div class="video-container">
+      <iframe src="https://dash.vodep39240327.workers.dev/?url=https://jiotvmblive.cdn.jio.com//bpk-tv/Star_Sports_1_Hindi_BTS/output/index.mpd?name=Star_Sports_1_Hindi&keyId=8ea9b607549252068e260a5f4d7dd321&key=350c0aaffedf51cc1502e9543c7c885e&cookie=__hdnea__=st=1774665571~exp=1774751971~acl=/*~hmac=31eaa520cf64ecf08f2a45b8b60318b8d952d9a8c15b5042e64d7a95caf5b071" allowfullscreen allow="autoplay; encrypted-media"></iframe>
+    </div>
+    <div class="video-bar"></div>
+  </div>
+
+  <div class="ticker-wrap">
+    <div class="ticker-text">
+       WELCOME TO SPORTLINK 🏏 | FOLLOW WHATSAPP CHANNEL FOR LIVE LINKS 📱 | NO BUFFERING HD STREAM
+    </div>
+  </div>
+
+  <div class="action-section">
+    <a href="https://whatsapp.com/channel/0029VbC2oQsC6ZvmwpR3v73v" class="btn-main">
+      <div style="display:flex; align-items:center; gap:12px;">
+        <i class="material-icons" style="color:#000;">chat</i>
+        <div class="btn-text">
+          <h3>Follow WhatsApp</h3>
+          <p>For Link Updates & Live Cricket</p>
+        </div>
+      </div>
+      <i class="material-icons" style="color:#000;">chevron_right</i>
+    </a>
+
+    <div class="btn-secondary-grid">
+      <a href="javascript:void(0)" onclick="sharePage()" class="btn-sec">
+        <i class="material-icons">share</i><span style="color:#ccc; font-size:12px;">Share</span>
+      </a>
+      <a href="javascript:location.reload()" class="btn-sec">
+        <i class="material-icons">refresh</i><span style="color:#ccc; font-size:12px;">Refresh</span>
+      </a>
+    </div>
+  </div>
+
+  <script>
+    const WEBSITE_ID = "sportlink_live_v2"; 
+
+    function toggleMenu() {
+      document.getElementById('sidebar').classList.toggle('open');
+      document.getElementById('overlay').classList.toggle('active');
+    }
+
+    window.onload = () => {
+      setTimeout(() => {
+        if(!sessionStorage.getItem('pop_shown_' + WEBSITE_ID)) {
+          document.getElementById('popup').classList.add('active');
+        }
+      }, 2500);
+    };
+
+    function closePopup() {
+      document.getElementById('popup').classList.remove('active');
+      sessionStorage.setItem('pop_shown_' + WEBSITE_ID, 'true');
+    }
+
+    async function sharePage() {
+      if(navigator.share) await navigator.share({title:'SPORTLINK Live', text: 'Watch Live Cricket!', url: window.location.href});
+      else alert("Link copied!");
+    }
+  </script>
+</body>
+</html>
